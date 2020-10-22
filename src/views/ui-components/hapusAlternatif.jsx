@@ -21,35 +21,28 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function TambahAlternatif() {
+export default function HapusAlternatif() {
     const classes = useStyles();
     return (
         <div>
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
                     <i className="ti-thumb-up mr-2"> </i>
-            Tambah Alternatif
+            Hapus Alternatif
             </CardTitle>
                 <CardBody className="">
-                    <div className="form-group">
-                        <form className="form" noValidate autoComplete="off">
-                            <div>
-                                <TextField id="no-id" label="Nomor ID Alternatif" variant="outlined" />
-                            </div><br/>
-                            <div>
-                                <TextField id="nama" label="Nama Alternatif" variant="outlined" />
-                            </div>
-                        </form>
+                    <div className="hapus">
+                        <h3>Apakah anda ingin menghapus alternatif ini?</h3>
                     </div>
                     <Row className="mt-3">
                         <Col>
                             <Link className="button-link" to="/alternatif">
-                                <Button className="btn" color="success">Simpan</Button>
+                                <Button className="btn" color="danger">Ya</Button>
                             </Link>
                         </Col>
                         <Col>
                             <Link className="button-link" to="/alternatif">
-                                <Button className="btn" color="danger">Kembali</Button>
+                                <Button className="btn" color="info">Tidak</Button>
                             </Link>
                         </Col>
                         <Col></Col>

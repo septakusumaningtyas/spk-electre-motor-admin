@@ -21,34 +21,31 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function TambahAlternatif() {
+export default function EditKriteria() {
     const classes = useStyles();
     return (
         <div>
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
                     <i className="ti-thumb-up mr-2"> </i>
-            Tambah Alternatif
+            Edit Kriteria
             </CardTitle>
                 <CardBody className="">
                     <div className="form-group">
                         <form className="form" noValidate autoComplete="off">
                             <div>
-                                <TextField id="no-id" label="Nomor ID Alternatif" variant="outlined" />
-                            </div><br/>
-                            <div>
-                                <TextField id="nama" label="Nama Alternatif" variant="outlined" />
+                                <TextField id="nama" label="Nama Kriteria" variant="outlined" />
                             </div>
                         </form>
                     </div>
                     <Row className="mt-3">
                         <Col>
-                            <Link className="button-link" to="/alternatif">
+                            <Link className="button-link" to="/kriteria">
                                 <Button className="btn" color="success">Simpan</Button>
                             </Link>
                         </Col>
                         <Col>
-                            <Link className="button-link" to="/alternatif">
+                            <Link className="button-link" to="/kriteria">
                                 <Button className="btn" color="danger">Kembali</Button>
                             </Link>
                         </Col>

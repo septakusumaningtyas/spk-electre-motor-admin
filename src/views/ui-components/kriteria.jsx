@@ -31,8 +31,10 @@ function createData(no, nama, aksi) {
 const rows = [
   createData('1', 'Harga',
     <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
+        <Col><Link className="button-link" to="/edit-kriteria"><Button className="btn" color="warning">Edit</Button></Link></Col>
+        <Col>
+            <Link className="button-link" to="/hapus-kriteria"><Button className="btn" color="danger">Delete</Button></Link>
+        </Col><Col></Col> <Col></Col>
     </Row>),
   createData('2', 'Konsumsi BBM',
     <Row className="mt-3">
@@ -82,9 +84,9 @@ export default function Kriteria() {
             Kriteria
             </CardTitle>
                 <CardBody className="">
-                    <Button className="btn" color="primary">
-                        <Link className="button-link" to="/tambah-kriteria">Tambah Kriteria</Link>
-                    </Button>
+                    <Link className="button-link" to="/tambah-kriteria">
+                        <Button className="btn" color="primary">Tambah Kriteria</Button>
+                    </Link>
                     <div className="mt-3">
                         <Paper className={classes.root}>
                             <TableContainer className={classes.container}>

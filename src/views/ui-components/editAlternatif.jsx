@@ -21,21 +21,18 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function TambahAlternatif() {
+export default function EditAlternatif() {
     const classes = useStyles();
     return (
         <div>
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
                     <i className="ti-thumb-up mr-2"> </i>
-            Tambah Alternatif
+            Edit Alternatif
             </CardTitle>
                 <CardBody className="">
                     <div className="form-group">
                         <form className="form" noValidate autoComplete="off">
-                            <div>
-                                <TextField id="no-id" label="Nomor ID Alternatif" variant="outlined" />
-                            </div><br/>
                             <div>
                                 <TextField id="nama" label="Nama Alternatif" variant="outlined" />
                             </div>

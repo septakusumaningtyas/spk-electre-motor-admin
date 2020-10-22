@@ -8,7 +8,6 @@ import {
     Button, Row, Col
 } from 'reactstrap';
 import { Link } from "react-router-dom";
-//import Popup from 'reactjs-popup';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -18,41 +17,43 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import '../../assets/scss/style.css';
 
 const columns = [
-  { id: 'no', label: 'No', minWidth: 50 },
-  { id: 'nama', label: 'Nama Alternatif', minWidth: 100 },
-  { id: 'aksi', label: 'Aksi', minWidth: 75 },
+    { id: 'no', label: 'No', minWidth: 170 },
+    { id: 'nama', label: 'Nama', minWidth: 100 },
+    {
+      id: 'email',
+      label: 'Email',
+      minWidth: 170
+    },
+    {
+      id: 'tanggal',
+      label: 'Tanggal Akses',
+      minWidth: 170,
+    },
+    {
+      id: 'alamat',
+      label: 'Alamat',
+      minWidth: 170,
+    },
+    {
+      id: 'aksi',
+      label: 'Aksi',
+      minWidth: 170,
+    },
 ];
 
-function createData(no, nama, aksi) {
-  return {no, nama, aksi};
+function createData(no, nama, email, tanggal, alamat, aksi) {
+    return {no, nama, email, tanggal, alamat, aksi};
 }
 
 const rows = [
-  createData('1', 'Honda Vario 125 CC', 
-    <Row className="mt-3">
-        <Col><Link className="button-link" to="/edit-alternatif"><Button className="btn" color="warning">Edit</Button></Link></Col>
-        <Col>
-            <Link className="button-link" to="/hapus-alternatif"><Button className="btn" color="danger">Delete</Button></Link>
-        </Col><Col></Col> <Col></Col>
-    </Row>),
-  createData('2', 'Yamaha Mio M3 125 CC',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>),
-  createData('3', 'Suzuki Address Playful',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>),
-  createData('4', 'Vespa S 125 I-GET',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>)
+    createData('1', 'Adi', "@gmail.com", "9-10-2020", "Malang", 
+    <Link className="button-link" to="/detail-pengguna"><Button className="btn" color="info">Detail</Button></Link>),
+    createData('2', 'Budi',"@gmail.com" , "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
+    createData('3', 'Chintya', "@gmail.com", "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
+    createData('4', 'Eni', "@gmail.com", "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
+    createData('5', 'Fani', "@gmail.com", "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
 ];
 
 const useStyles = makeStyles({
@@ -64,7 +65,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Alternatif() {
+export default function DataPengguna() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -82,13 +83,10 @@ export default function Alternatif() {
         <div>
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
-                    <i className="ti-thumb-up mr-2"> </i>
-            Alternatif
+                    <i className="ti-user mr-2"> </i>
+            Data Pengguna
             </CardTitle>
                 <CardBody className="">
-                    <Link className="button-link" to="/tambah-alternatif">
-                        <Button className="btn" color="primary">Tambah Alternatif</Button>
-                    </Link>
                     <div className="mt-3">
                         <Paper className={classes.root}>
                             <TableContainer className={classes.container}>

@@ -23,36 +23,17 @@ import '../../assets/scss/style.css';
 const columns = [
   { id: 'no', label: 'No', minWidth: 50 },
   { id: 'nama', label: 'Nama Alternatif', minWidth: 100 },
-  { id: 'aksi', label: 'Aksi', minWidth: 75 },
 ];
 
-function createData(no, nama, aksi) {
-  return {no, nama, aksi};
+function createData(no, nama) {
+  return {no, nama};
 }
 
 const rows = [
-  createData('1', 'Honda Vario 125 CC', 
-    <Row className="mt-3">
-        <Col><Link className="button-link" to="/edit-alternatif"><Button className="btn" color="warning">Edit</Button></Link></Col>
-        <Col>
-            <Link className="button-link" to="/hapus-alternatif"><Button className="btn" color="danger">Delete</Button></Link>
-        </Col><Col></Col> <Col></Col>
-    </Row>),
-  createData('2', 'Yamaha Mio M3 125 CC',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>),
-  createData('3', 'Suzuki Address Playful',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>),
-  createData('4', 'Vespa S 125 I-GET',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>)
+  createData('1', 'Honda Vario 125 CC'),
+  createData('2', 'Yamaha Mio M3 125 CC'),
+  createData('3', 'Suzuki Address Playful'),
+  createData('4', 'Vespa S 125 I-GET')
 ];
 
 const useStyles = makeStyles({
@@ -64,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Alternatif() {
+export default function DetailPengguna() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -82,13 +63,17 @@ export default function Alternatif() {
         <div>
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
-                    <i className="ti-thumb-up mr-2"> </i>
-            Alternatif
+                    <i className="ti-user mr-2"> </i>
+            Detail Pengguna
             </CardTitle>
                 <CardBody className="">
-                    <Link className="button-link" to="/tambah-alternatif">
-                        <Button className="btn" color="primary">Tambah Alternatif</Button>
-                    </Link>
+                    <div className="mt-3">
+                        <h5>Nama : Adi</h5>
+                        <h5>Email : adi@gmail.com</h5>
+                        <h5>Tanggal Akses : 22-10-2020</h5>
+                        <h5>Alamat : Malang</h5>
+                    </div>
+                    <div className="mt-3"><h3>Hasil Perangkingan Rekomendasi Sepeda Motor :</h3></div>
                     <div className="mt-3">
                         <Paper className={classes.root}>
                             <TableContainer className={classes.container}>
@@ -124,16 +109,9 @@ export default function Alternatif() {
                                 </TableBody>
                                 </Table>
                             </TableContainer>
-                            <TablePagination
-                                rowsPerPageOptions={[10, 25, 100]}
-                                component="div"
-                                count={rows.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                onChangePage={handleChangePage}
-                                onChangeRowsPerPage={handleChangeRowsPerPage}
-                            />
                         </Paper>
+                        <br/>
+                        <Link className="button-link" to="/data-pengguna"><Button className="btn" color="primary">Kembali</Button></Link>
                     </div>
                 </CardBody>
             </Card>

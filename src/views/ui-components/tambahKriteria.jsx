@@ -43,12 +43,14 @@ export default function Alternatif() {
                     </div>
                     <Row className="mt-3">
                         <Col>
-                            <Button className="btn" color="success">Simpan</Button>
+                            <Link className="button-link" to="/kriteria">
+                                <Button className="btn" color="success">Simpan</Button>
+                            </Link>
                         </Col>
                         <Col>
-                            <Button className="btn" color="danger">
-                                <Link className="button-link" to="/kriteria">Kembali</Link>
-                            </Button>
+                            <Link className="button-link" to="/kriteria">
+                                <Button className="btn" color="danger">Kembali</Button>
+                            </Link>
                         </Col>
                         <Col></Col>
                         <Col></Col>
