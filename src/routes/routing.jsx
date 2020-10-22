@@ -13,6 +13,7 @@ import EditKriteria from '../views/ui-components/editKriteria.jsx';
 import HapusKriteria from '../views/ui-components/hapusKriteria.jsx';
 import DetailPengguna from '../views/ui-components/detailPengguna.jsx';
 import ProsesElectre from '../views/ui-components/prosesElectre.jsx';
+import ProsesTopsis from '../views/ui-components/prosesTopsis.jsx';
 
 var ThemeRoutes = [
   { 
@@ -82,6 +83,10 @@ var ThemeRoutes = [
   {
     path: '/proses-electre',
     component: ProsesElectre
+  },
+  {
+    path: '/proses-topsis',
+    component: ProsesTopsis
   },
   { path: '/', pathTo: '/dashboard', name: 'Dashboard', redirect: true }
 ];
