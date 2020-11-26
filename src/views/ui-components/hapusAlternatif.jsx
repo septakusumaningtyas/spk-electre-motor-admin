@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HapusAlternatif() {
     const classes = useStyles();
+
     return (
         <div>
             <Card>

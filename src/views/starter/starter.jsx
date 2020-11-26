@@ -11,7 +11,6 @@ import {
     Col
 } from 'reactstrap';
 import { SalesSummary, Projects, Feeds } from 'components/dashboard-components';
-import Login from '../login/login.jsx';
 
 import img1 from '../../assets/images/big/img1.jpg';
 import img2 from '../../assets/images/big/img2.jpg';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
     Alert,
     UncontrolledAlert,
@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,6 +24,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditKriteria() {
     const classes = useStyles();
+    const [kriteriaList,setKriteriaList] = useState([]);
+    useEffect(() => {
+        Axios.get('http://localhost:3001/getkriteria')
+            .then((response)=> {
+                setKriteriaList(response.data);
+            });
+    }, []);
+    const [newNamaKriteria, setNewNamaKriteria] = useState("");
+    const selectKriteria = (id) => {
+        Axios.get(`http://localhost:3001/getkriteria/${id}`);
+    }
+    const updateKriteria = (id) => {
+        Axios.put("http://localhost:3001/updatekriteria",{
+            nama_kriteria: newNamaKriteria,
+        });
+        setNewNamaKriteria("");
+    };
+
     return (
         <div>
             <Card>
@@ -34,14 +53,16 @@ export default function EditKriteria() {
                     <div className="form-group">
                         <form className="form" noValidate autoComplete="off">
                             <div>
-                                <TextField id="nama" label="Nama Kriteria" variant="outlined" />
+                                <TextField id="nama" label="Nama Kriteria" variant="outlined" onChange={(e) => {
+                                    setNewNamaKriteria(e.target.value);
+                                }}/>
                             </div>
                         </form>
                     </div>
                     <Row className="mt-3">
                         <Col>
                             <Link className="button-link" to="/kriteria">
-                                <Button className="btn" color="success">Simpan</Button>
+                                <Button className="btn" color="success" onClick={()=> {updateKriteria(selectKriteria.id)}}>Simpan</Button>
                             </Link>
                         </Col>
                         <Col>

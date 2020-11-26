@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Alert,
     UncontrolledAlert,
@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,6 +24,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditAlternatif() {
     const classes = useStyles();
+    const [alternatifList,setAlternatifList] = useState([]);
+    useEffect(() => {
+        Axios.get('http://localhost:3001/getalternatif')
+            .then((response)=> {
+                setAlternatifList(response.data);
+            });
+    }, []);
+    const [newNamaAlternatif, setNewNamaAlternatif] = useState("");
+    const selectAlternatif = (id) => {
+        Axios.get(`http://localhost:3001/getalternatif/${id}`);
+    }
+    const updateAlternatif = (id) => {
+        Axios.put("http://localhost:3001/updatealternatif",{
+            nama_alternatif: newNamaAlternatif,
+        });
+        setNewNamaAlternatif("");
+    };
+
     return (
         <div>
             <Card>
@@ -34,14 +53,16 @@ export default function EditAlternatif() {
                     <div className="form-group">
                         <form className="form" noValidate autoComplete="off">
                             <div>
-                                <TextField id="nama" label="Nama Alternatif" variant="outlined" />
+                                <TextField id="nama" label="Nama Alternatif" variant="outlined" onChange={(e) => {
+                                    setNewNamaAlternatif(e.target.value);
+                                }}/>
                             </div>
                         </form>
                     </div>
                     <Row className="mt-3">
                         <Col>
                             <Link className="button-link" to="/alternatif">
-                                <Button className="btn" color="success">Simpan</Button>
+                                <Button className="btn" color="success" onClick={()=> {updateAlternatif(selectAlternatif.id)}}>Simpan</Button>
                             </Link>
                         </Col>
                         <Col>

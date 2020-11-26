@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
     Alert,
     UncontrolledAlert,
@@ -17,41 +17,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
-const columns = [
-  { id: 'no', label: 'No', minWidth: 50 },
-  { id: 'nama', label: 'Nama Kriteria', minWidth: 100 },
-  { id: 'aksi', label: 'Aksi', minWidth: 75 },
-];
-
-function createData(no, nama, aksi) {
-  return {no, nama, aksi};
-}
-
-const rows = [
-  createData('1', 'Harga',
-    <Row className="mt-3">
-        <Col><Link className="button-link" to="/edit-kriteria"><Button className="btn" color="warning">Edit</Button></Link></Col>
-        <Col>
-            <Link className="button-link" to="/hapus-kriteria"><Button className="btn" color="danger">Delete</Button></Link>
-        </Col><Col></Col> <Col></Col>
-    </Row>),
-  createData('2', 'Konsumsi BBM',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>),
-  createData('3', 'Kapasitas Tangki',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>),
-  createData('4', 'Popularitas',
-    <Row className="mt-3">
-        <Col><Button className="btn" color="warning">Edit</Button></Col>
-        <Col><Button className="btn" color="danger">Delete</Button></Col> <Col></Col> <Col></Col>
-    </Row>)
-];
+import TextField from '@material-ui/core/TextField';
+import Axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -76,56 +43,109 @@ export default function Kriteria() {
       setPage(0);
     };
 
+    const [kriteriaList,setKriteriaList] = useState([]);
+    useEffect(() => {
+        Axios.get('http://localhost:3001/getkriteria')
+            .then((response)=> {
+                setKriteriaList(response.data);
+            });
+    }, []);
+
+    const [nama_kriteria, setKriteria] = useState('');
+    const [id, setId] = useState('');
+    const submitKriteria = () => {
+        Axios.post("http://localhost:3001/addkriteria", {
+            id: id,
+            nama_kriteria: nama_kriteria,
+        });
+        setKriteriaList([
+            ...kriteriaList,
+            {id:id,nama_kriteria: nama_kriteria},
+        ]);
+    };
+
+    const deleteKriteria = (id) => {
+        Axios.delete(`http://localhost:3001/deletekriteria/${id}`);
+    }
+
+    const selectKriteria = (id) => {
+        Axios.get(`http://localhost:3001/getkriteria/${id}`);
+    }
+
     return (
         <div>
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
                     <i className="ti-bookmark-alt mr-2"> </i>
-            Kriteria
-            </CardTitle>
+                    Kriteria
+                </CardTitle>
                 <CardBody className="">
-                    <Link className="button-link" to="/tambah-kriteria">
+                    {/* <Link className="button-link" to="/tambah-kriteria">
                         <Button className="btn" color="primary">Tambah Kriteria</Button>
-                    </Link>
+                    </Link> */}
+                    <CardTitle className="bg-light border-bottom p-3 mb-0">
+                        <i className="ti-bookmark-alt mr-2"> </i>
+                    Tambah Kriteria
+                    </CardTitle>
+                    <CardBody className="">
+                        <div className="form-group">
+                            <form className="form" noValidate autoComplete="off">
+                                <div>
+                                    <TextField id="nama" label="Nama Kriteria" variant="outlined" 
+                                    onChange={(e) => setKriteria(e.target.value)}/>
+                                </div>
+                            </form>
+                        </div>
+                        <Row className="mt-3">
+                            <Col>
+                                <Link className="button-link" to="/kriteria">
+                                    <Button className="btn" color="success" onClick={submitKriteria}>Simpan</Button>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link className="button-link" to="/kriteria">
+                                    <Button className="btn" color="danger">Kembali</Button>
+                                </Link>
+                            </Col>
+                            <Col></Col>
+                            <Col></Col>
+                        </Row>
+                    </CardBody>
                     <div className="mt-3">
                         <Paper className={classes.root}>
                             <TableContainer className={classes.container}>
                                 <Table stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
-                                    {columns.map((column) => (
-                                        <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                        >
-                                        {column.label}
-                                        </TableCell>
-                                    ))}
+                                        <TableCell style={{minWidth: 50}}>No</TableCell>
+                                        <TableCell style={{minWidth: 100}}>Nama Kriteria</TableCell>
+                                        <TableCell style={{minWidth: 75}}>Aksi</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                    return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                                            </TableCell>
-                                            );
-                                        })}
-                                        </TableRow>
-                                    );
+                                {kriteriaList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(val=> {
+                                        return (
+                                            <TableRow hover role="checkbox" tabIndex={-1} key={val}>
+                                                <TableCell>{val.id}</TableCell>
+                                                <TableCell>{val.nama_kriteria}</TableCell>
+                                                <TableCell>
+                                                    <Row className="mt-3">
+                                                        <Col><Link className="button-link" to="/edit-kriteria"><Button className="btn" color="warning" onClick={selectKriteria(val.id)}>Edit</Button></Link></Col>
+                                                        <Col>
+                                                            <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus kriteria ini?')) deleteKriteria(val.id)}}>Delete</Button>
+                                                        </Col><Col></Col> <Col></Col>
+                                                    </Row>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
                                     })}
                                 </TableBody>
                                 </Table>
                             </TableContainer>
                             <TablePagination
-                                rowsPerPageOptions={[10, 25, 100]}
+                                rowsPerPageOptions={[5, 25, 100]}
                                 component="div"
-                                count={rows.length}
+                                count={kriteriaList.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 onChangePage={handleChangePage}

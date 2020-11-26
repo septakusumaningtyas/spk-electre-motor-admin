@@ -28,8 +28,8 @@ export default function Alternatif() {
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
                     <i className="ti-bookmark-alt mr-2"> </i>
-            Tambah Kriteria
-            </CardTitle>
+                Tambah Kriteria
+                </CardTitle>
                 <CardBody className="">
                     <div className="form-group">
                         <form className="form" noValidate autoComplete="off">
