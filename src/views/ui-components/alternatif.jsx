@@ -74,6 +74,19 @@ export default function Alternatif() {
         Axios.get(`http://localhost:3001/getalternatif/${id}`);
     }
 
+    const [newNamaAlternatif, setNewNamaAlternatif] = useState("");
+    const updateAlternatif = (id) => {
+        Axios.put("http://localhost:3001/updatealternatif",{
+        id: id,    
+        nama_alternatif: newNamaAlternatif,
+        });
+        setNewNamaAlternatif("");
+    };
+
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     return (
         <div>
             <Card>
@@ -82,9 +95,6 @@ export default function Alternatif() {
                     Alternatif
                 </CardTitle>
                 <CardBody className="">
-                    {/* <Link className="button-link" to="/tambah-alternatif">
-                        <Button className="btn" color="primary">Tambah Alternatif</Button>
-                    </Link> */}
                         <CardTitle className="bg-light border-bottom p-3 mb-0">
                                 <i className="ti-thumb-up mr-2"> </i>
                         Tambah Alternatif
@@ -100,17 +110,19 @@ export default function Alternatif() {
                             </div>
                             <Row className="mt-3">
                                 <Col>
-                                    <Link className="button-link" to="/alternatif">
-                                        <Button className="btn" color="success" onClick={submitAlternatif}>Simpan</Button>
-                                    </Link>
+                                    <div className="row">
+                                        <div className="col-2">
+                                            <Link className="button-link" to="/alternatif">
+                                                <Button className="btn" color="success" onClick={submitAlternatif}>Simpan</Button>
+                                            </Link>
+                                        </div>
+                                        <div className="col-2">
+                                            <Link className="button-link" to="/alternatif">
+                                                <Button className="btn" color="info" onClick={refreshPage}>Refresh</Button>
+                                            </Link>
+                                        </div>
+                                    </div>
                                 </Col>
-                                <Col>
-                                    <Link className="button-link" to="/alternatif">
-                                        <Button className="btn" color="danger">Kembali</Button>
-                                    </Link>
-                                </Col>
-                                <Col></Col>
-                                <Col></Col>
                             </Row>
                         </CardBody>
                     <div className="mt-3">
@@ -125,17 +137,24 @@ export default function Alternatif() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {alternatifList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(val=> {
+                                    {alternatifList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(val => {
                                         return (
                                             <TableRow hover role="checkbox" tabIndex={-1} key={val}>
                                                 <TableCell>{val.id}</TableCell>
                                                 <TableCell>{val.nama_alternatif}</TableCell>
                                                 <TableCell>
                                                     <Row className="mt-3">
-                                                        <Col><Link className="button-link" to="/edit-alternatif"><Button className="btn" color="warning" onClick={selectAlternatif(val.id)}>Edit</Button></Link></Col>
+                                                        <Col>
+                                                            <div className="row">
+                                                                <div className="col-8"><TextField id="nama" label="Nama Kriteria" variant="outlined" onChange={(e) => {
+                                                                    setNewNamaAlternatif(e.target.value);
+                                                                }}/></div>
+                                                                <div className="col-4"><Button className="btn" color="warning" onClick={()=> {updateAlternatif(val.id)}}>Edit</Button></div>
+                                                            </div>
+                                                        </Col>
                                                         <Col>
                                                             <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus alternatif ini?')) deleteAlternatif(val.id)}}>Delete</Button>
-                                                        </Col><Col></Col> <Col></Col>
+                                                        </Col>
                                                     </Row>
                                                 </TableCell>
                                             </TableRow>

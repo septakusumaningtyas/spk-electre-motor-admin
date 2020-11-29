@@ -72,6 +72,19 @@ export default function Kriteria() {
         Axios.get(`http://localhost:3001/getkriteria/${id}`);
     }
 
+    const [newNamaKriteria, setNewNamaKriteria] = useState("");
+    const updateKriteria = (id) => {
+        Axios.put("http://localhost:3001/updatekriteria",{
+            id: id,
+            nama_kriteria: newNamaKriteria,
+        });
+        setNewNamaKriteria("");
+    };
+
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     return (
         <div>
             <Card>
@@ -80,9 +93,6 @@ export default function Kriteria() {
                     Kriteria
                 </CardTitle>
                 <CardBody className="">
-                    {/* <Link className="button-link" to="/tambah-kriteria">
-                        <Button className="btn" color="primary">Tambah Kriteria</Button>
-                    </Link> */}
                     <CardTitle className="bg-light border-bottom p-3 mb-0">
                         <i className="ti-bookmark-alt mr-2"> </i>
                     Tambah Kriteria
@@ -98,17 +108,19 @@ export default function Kriteria() {
                         </div>
                         <Row className="mt-3">
                             <Col>
-                                <Link className="button-link" to="/kriteria">
-                                    <Button className="btn" color="success" onClick={submitKriteria}>Simpan</Button>
-                                </Link>
+                                <div className="row">
+                                    <div className="col-2">
+                                        <Link className="button-link" to="/kriteria">
+                                            <Button className="btn" color="success" onClick={submitKriteria}>Simpan</Button>
+                                        </Link>
+                                    </div>
+                                    <div className="col-2">
+                                        <Link className="button-link" to="/kriteria">
+                                            <Button className="btn" color="info" onClick={refreshPage}>Refresh</Button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </Col>
-                            <Col>
-                                <Link className="button-link" to="/kriteria">
-                                    <Button className="btn" color="danger">Kembali</Button>
-                                </Link>
-                            </Col>
-                            <Col></Col>
-                            <Col></Col>
                         </Row>
                     </CardBody>
                     <div className="mt-3">
@@ -130,10 +142,17 @@ export default function Kriteria() {
                                                 <TableCell>{val.nama_kriteria}</TableCell>
                                                 <TableCell>
                                                     <Row className="mt-3">
-                                                        <Col><Link className="button-link" to="/edit-kriteria"><Button className="btn" color="warning" onClick={selectKriteria(val.id)}>Edit</Button></Link></Col>
+                                                        <Col>
+                                                            <div className="row">
+                                                                <div className="col-8"><TextField id="nama" label="Nama Kriteria" variant="outlined" onChange={(e) => {
+                                                                    setNewNamaKriteria(e.target.value);
+                                                                }}/></div>
+                                                                <div className="col-4"><Button className="btn" color="warning" onClick={()=> {updateKriteria(val.id)}}>Edit</Button></div>
+                                                            </div>
+                                                        </Col>
                                                         <Col>
                                                             <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus kriteria ini?')) deleteKriteria(val.id)}}>Delete</Button>
-                                                        </Col><Col></Col> <Col></Col>
+                                                        </Col>
                                                     </Row>
                                                 </TableCell>
                                             </TableRow>
