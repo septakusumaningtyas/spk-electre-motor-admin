@@ -14,8 +14,18 @@ import HapusKriteria from '../views/ui-components/hapusKriteria.jsx';
 import DetailPengguna from '../views/ui-components/detailPengguna.jsx';
 import ProsesElectre from '../views/ui-components/prosesElectre.jsx';
 import ProsesTopsis from '../views/ui-components/prosesTopsis.jsx';
+import Registration from '../views/ui-components/registration.jsx';
+import DetailAlternatif from '../views/ui-components/detailAlternatif.jsx';
+import SubKriteria from '../views/ui-components/subKriteria.jsx';
+import Pesan from '../views/ui-components/pesan.jsx';
 
 var ThemeRoutes = [
+  {
+    path: '/registration',
+    name: 'Login',
+    icon: 'ti-id-badge',
+    component: Registration
+  },
   { 
     path: '/dashboard', 
     name: 'Dashboard', 
@@ -29,16 +39,34 @@ var ThemeRoutes = [
     component: Alternatif
   },
   {
+    path: '/alternatif-detail',
+    name: 'Detail Alternatif',
+    icon: 'ti-thumb-up',
+    component: DetailAlternatif
+  },
+  {
     path: '/kriteria',
     name: 'Kriteria',
     icon: 'ti-bookmark-alt',
     component: Kriteria
   },
   {
+    path: '/subkriteria',
+    name: 'Sub Kriteria',
+    icon: 'ti-bookmark-alt',
+    component: SubKriteria
+  },
+  {
     path: '/data-pengguna',
     name: 'Data Pengguna',
     icon: 'ti-user',
     component: DataPengguna
+  },
+  {
+    path: '/pesan',
+    name: 'Pesan',
+    icon: 'ti-comment-alt',
+    component: Pesan
   },
   {
     path: '/electre-topsis',
@@ -53,30 +81,6 @@ var ThemeRoutes = [
     component: Topsis
   },
   {
-    path: '/tambah-alternatif',
-    component: TambahAlternatif
-  },
-  {
-    path: '/tambah-kriteria',
-    component: TambahKriteria
-  },
-  {
-    path: '/edit-alternatif',
-    component: EditAlternatif
-  },
-  {
-    path: '/hapus-alternatif',
-    component: HapusAlternatif
-  },
-  {
-    path: '/edit-kriteria',
-    component: EditKriteria
-  },
-  {
-    path: '/hapus-kriteria',
-    component: HapusKriteria
-  },
-  {
     path: '/detail-pengguna',
     component: DetailPengguna
   },
@@ -88,6 +92,6 @@ var ThemeRoutes = [
     path: '/proses-topsis',
     component: ProsesTopsis
   },
-  { path: '/', pathTo: '/dashboard', name: 'Dashboard', redirect: true }
+  { path: '/', pathTo: '/registration', redirect: true }
 ];
 export default ThemeRoutes;

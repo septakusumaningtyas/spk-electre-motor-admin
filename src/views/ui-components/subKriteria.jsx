@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Kriteria() {
+export default function SubKriteria() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -45,28 +45,32 @@ export default function Kriteria() {
 
     const [kriteriaList,setKriteriaList] = useState([]);
     useEffect(() => {
-        Axios.get('http://localhost:3001/getkriteria')
+        Axios.get('http://localhost:3001/getsubkriteria')
             .then((response)=> {
                 setKriteriaList(response.data);
             });
     }, []);
 
-    const [nama_kriteria, setKriteria] = useState('');
+    const [kriteria, setKriteria] = useState('');
+    const [sub_kriteria, setSubKriteria] = useState('');
+    const [bobot, setBobot] = useState('');
     const [id, setId] = useState('');
-    const submitKriteria = () => {
-        Axios.post("http://localhost:3001/addkriteria", {
+    const submitSubKriteria = () => {
+        Axios.post("http://localhost:3001/addsubkriteria", {
             id: id,
-            nama_kriteria: nama_kriteria,
+            kriteria: kriteria,
+            sub_kriteria: sub_kriteria,
+            bobot: bobot,
         });
         setKriteriaList([
             ...kriteriaList,
-            {id:id,nama_kriteria: nama_kriteria},
+            {id:id,kriteria: kriteria, sub_kriteria: sub_kriteria, bobot: bobot},
         ]);
         window.location.reload(false);
     };
 
-    const deleteKriteria = (id) => {
-        Axios.delete(`http://localhost:3001/deletekriteria/${id}`);
+    const deleteSubKriteria = (id) => {
+        Axios.delete(`http://localhost:3001/deletesubkriteria/${id}`);
         window.location.reload(false);
     }
 
@@ -75,12 +79,18 @@ export default function Kriteria() {
     }
 
     const [newNamaKriteria, setNewNamaKriteria] = useState("");
-    const updateKriteria = (id) => {
-        Axios.put("http://localhost:3001/updatekriteria",{
+    const [newSubKriteria, setNewSubKriteria] = useState("");
+    const [newBobot, setNewBobot] = useState("");
+    const updateSubKriteria = (id) => {
+        Axios.put("http://localhost:3001/updatesubkriteria",{
             id: id,
-            nama_kriteria: newNamaKriteria,
+            kriteria: newNamaKriteria,
+            sub_kriteria: newSubKriteria,
+            bobot: newBobot,
         });
         setNewNamaKriteria("");
+        setNewSubKriteria("");
+        setNewBobot("");
         window.location.reload(false);
     };
 
@@ -93,12 +103,12 @@ export default function Kriteria() {
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
                     <i className="ti-bookmark-alt mr-2"> </i>
-                    Kriteria
+                    Sub Kriteria
                 </CardTitle>
                 <CardBody className="">
                     <CardTitle className="bg-light border-bottom p-3 mb-0">
                         <i className="ti-bookmark-alt mr-2"> </i>
-                    Tambah Kriteria
+                    Tambah Sub Kriteria
                     </CardTitle>
                     <CardBody className="">
                         <div className="form-group">
@@ -106,6 +116,10 @@ export default function Kriteria() {
                                 <div>
                                     <TextField id="nama" label="Nama Kriteria" variant="outlined" 
                                     onChange={(e) => setKriteria(e.target.value)}/>
+                                    <TextField id="sub_kriteria" label="Sub Kriteria" variant="outlined" 
+                                    onChange={(e) => setSubKriteria(e.target.value)}/>
+                                    <TextField id="bobot" label="Bobot" variant="outlined" 
+                                    onChange={(e) => setBobot(e.target.value)}/>
                                 </div>
                             </form>
                         </div>
@@ -114,7 +128,7 @@ export default function Kriteria() {
                                 <div className="row">
                                     <div className="col-2">
                                         <Link className="button-link" to="/kriteria">
-                                            <Button className="btn" color="success" onClick={submitKriteria}>Simpan</Button>
+                                            <Button className="btn" color="success" onClick={submitSubKriteria}>Simpan</Button>
                                         </Link>
                                     </div>
                                 </div>
@@ -128,7 +142,9 @@ export default function Kriteria() {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell style={{minWidth: 50}}>No</TableCell>
-                                        <TableCell style={{minWidth: 100}}>Nama Kriteria</TableCell>
+                                        <TableCell style={{minWidth: 50}}>Nama Kriteria</TableCell>
+                                        <TableCell style={{minWidth: 50}}>Sub Kriteria</TableCell>
+                                        <TableCell style={{minWidth: 50}}>Bobot</TableCell>
                                         <TableCell style={{minWidth: 75}}>Aksi</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -137,7 +153,9 @@ export default function Kriteria() {
                                         return (
                                             <TableRow hover role="checkbox" tabIndex={-1} key={val}>
                                                 <TableCell>{val.id}</TableCell>
-                                                <TableCell>{val.nama_kriteria}</TableCell>
+                                                <TableCell>{val.kriteria}</TableCell>
+                                                <TableCell>{val.sub_kriteria}</TableCell>
+                                                <TableCell>{val.bobot}</TableCell>
                                                 <TableCell>
                                                     <Row className="mt-3">
                                                         <Col>
@@ -145,11 +163,11 @@ export default function Kriteria() {
                                                                 <div className="col-8"><TextField id="nama" label="Nama Kriteria" variant="outlined" onChange={(e) => {
                                                                     setNewNamaKriteria(e.target.value);
                                                                 }}/></div>
-                                                                <div className="col-4"><Button className="btn" color="warning" onClick={()=> {updateKriteria(val.id)}}>Edit</Button></div>
+                                                                <div className="col-4"><Button className="btn" color="warning" onClick={()=> {updateSubKriteria(val.id)}}>Edit</Button></div>
                                                             </div>
                                                         </Col>
                                                         <Col>
-                                                            <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus kriteria ini?')) deleteKriteria(val.id)}}>Delete</Button>
+                                                            <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus sub kriteria ini?')) deleteSubKriteria(val.id)}}>Delete</Button>
                                                         </Col>
                                                     </Row>
                                                 </TableCell>
