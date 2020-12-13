@@ -118,7 +118,7 @@ export default function SubKriteria() {
                                     onChange={(e) => setKriteria(e.target.value)}/>
                                     <TextField id="sub_kriteria" label="Sub Kriteria" variant="outlined" 
                                     onChange={(e) => setSubKriteria(e.target.value)}/>
-                                    <TextField id="bobot" label="Bobot" variant="outlined" 
+                                    <TextField id="bobot" label="Bobot Sub Kriteria" variant="outlined" 
                                     onChange={(e) => setBobot(e.target.value)}/>
                                 </div>
                             </form>
@@ -158,17 +158,28 @@ export default function SubKriteria() {
                                                 <TableCell>{val.bobot}</TableCell>
                                                 <TableCell>
                                                     <Row className="mt-3">
-                                                        <Col>
-                                                            <div className="row">
-                                                                <div className="col-8"><TextField id="nama" label="Nama Kriteria" variant="outlined" onChange={(e) => {
-                                                                    setNewNamaKriteria(e.target.value);
-                                                                }}/></div>
-                                                                <div className="col-4"><Button className="btn" color="warning" onClick={()=> {updateSubKriteria(val.id)}}>Edit</Button></div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col>
-                                                            <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus sub kriteria ini?')) deleteSubKriteria(val.id)}}>Delete</Button>
-                                                        </Col>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="nama" label="Nama Kriteria" variant="outlined" onChange={(e) => {
+                                                                setNewNamaKriteria(e.target.value);
+                                                            }}/></div>
+                                                            <div className="col-4"></div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="sub_kriteria" label="Sub Kriteria" variant="outlined" onChange={(e) => {
+                                                                setNewSubKriteria(e.target.value);
+                                                            }}/></div>
+                                                            <div className="col-4"></div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="bobot" label="Bobot Sub Kriteria" variant="outlined" onChange={(e) => {
+                                                                setNewBobot(e.target.value);
+                                                            }}/></div>
+                                                            <div className="col-4"></div>
+                                                        </div>
+                                                    </Row>
+                                                    <Row>
+                                                        <Button className="btn" color="warning" onClick={()=> {updateSubKriteria(val.id)}}>Edit</Button>
+                                                        <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus sub kriteria ini?')) deleteSubKriteria(val.id)}}>Delete</Button>
                                                     </Row>
                                                 </TableCell>
                                             </TableRow>

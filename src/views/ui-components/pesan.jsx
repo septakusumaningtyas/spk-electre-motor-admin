@@ -51,43 +51,6 @@ export default function Pesan() {
             });
     }, []);
 
-    // const [nama_kriteria, setKriteria] = useState('');
-    // const [id, setId] = useState('');
-    // const submitKriteria = () => {
-    //     Axios.post("http://localhost:3001/addkriteria", {
-    //         id: id,
-    //         nama_kriteria: nama_kriteria,
-    //     });
-    //     setKriteriaList([
-    //         ...kriteriaList,
-    //         {id:id,nama_kriteria: nama_kriteria},
-    //     ]);
-    //     window.location.reload(false);
-    // };
-
-    // const deleteKriteria = (id) => {
-    //     Axios.delete(`http://localhost:3001/deletekriteria/${id}`);
-    //     window.location.reload(false);
-    // }
-
-    // const selectKriteria = (id) => {
-    //     Axios.get(`http://localhost:3001/getkriteria/${id}`);
-    // }
-
-    // const [newNamaKriteria, setNewNamaKriteria] = useState("");
-    // const updateKriteria = (id) => {
-    //     Axios.put("http://localhost:3001/updatekriteria",{
-    //         id: id,
-    //         nama_kriteria: newNamaKriteria,
-    //     });
-    //     setNewNamaKriteria("");
-    //     window.location.reload(false);
-    // };
-
-    // function refreshPage() {
-    //     window.location.reload(false);
-    // }
-
     return (
         <div>
             <Card>

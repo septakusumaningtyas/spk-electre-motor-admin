@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 const Feeds = () => {
     return (
         <div>
-            <Link to="/dashboard">
+            <Link to="/registration">
                 <button type="submit" className="btn btn-danger btn-block">Log out</button>
             </Link>
             <Card>

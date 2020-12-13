@@ -159,13 +159,13 @@ export default function DetailAlternatif() {
                                 <Table stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell style={{minWidth: 50}}>No</TableCell>
-                                        <TableCell style={{minWidth: 50}}>Nama Alternatif</TableCell>
-                                        <TableCell style={{minWidth: 50}}>Harga</TableCell>
-                                        <TableCell style={{minWidth: 50}}>Konsumsi BBM</TableCell>
-                                        <TableCell style={{minWidth: 50}}>Kapasitas Tangki</TableCell>
-                                        <TableCell style={{minWidth: 50}}>Popularitas</TableCell>
-                                        <TableCell style={{minWidth: 75}}>Aksi</TableCell>
+                                        <TableCell style={{minWidth: 30}}>No</TableCell>
+                                        <TableCell style={{minWidth: 30}}>Nama Alternatif</TableCell>
+                                        <TableCell style={{minWidth: 30}}>Harga</TableCell>
+                                        <TableCell style={{minWidth: 30}}>Konsumsi BBM</TableCell>
+                                        <TableCell style={{minWidth: 30}}>Kapasitas Tangki</TableCell>
+                                        <TableCell style={{minWidth: 30}}>Popularitas</TableCell>
+                                        <TableCell style={{minWidth: 100}}>Aksi</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -180,17 +180,35 @@ export default function DetailAlternatif() {
                                                 <TableCell>{val.popularitas}</TableCell>
                                                 <TableCell>
                                                     <Row className="mt-3">
-                                                        <Col>
-                                                            <div className="row">
-                                                                <div className="col-8"><TextField id="nama" label="Nama Alternatif" variant="outlined" onChange={(e) => {
-                                                                    setNewNamaAlternatif(e.target.value);
-                                                                }}/></div>
-                                                                <div className="col-4"><Button className="btn" color="warning" onClick={()=> {updateAlternatifDetail(val.id)}}>Edit</Button></div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col>
-                                                            <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus detail alternatif ini?')) deleteAlternatifDetail(val.id)}}>Delete</Button>
-                                                        </Col>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="nama" label="Nama Alternatif" variant="outlined" onChange={(e) => {
+                                                                setNewNamaAlternatif(e.target.value);
+                                                            }}/></div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="harga" label="Harga" variant="outlined" onChange={(e) => {
+                                                                setNewHarga(e.target.value);
+                                                            }}/></div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="konsumsi_bbm" label="Konsumsi BBM" variant="outlined" onChange={(e) => {
+                                                                setNewKonsumsiBbm(e.target.value);
+                                                            }}/></div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="kapasitas_tangki" label="Kapasitas Tangki" variant="outlined" onChange={(e) => {
+                                                                setNewKapasitasTangki(e.target.value);
+                                                            }}/></div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-8"><TextField id="popularitas" label="Popularitas" variant="outlined" onChange={(e) => {
+                                                                setNewPopularitas(e.target.value);
+                                                            }}/></div>
+                                                        </div>
+                                                    </Row>
+                                                    <Row>
+                                                        <Button className="btn" color="warning" onClick={()=> {updateAlternatifDetail(val.id)}}>Edit</Button>
+                                                        <Button className="btn" color="danger" onClick={() => {if (window.confirm('Apakah anda yakin menghapus detail alternatif ini?')) deleteAlternatifDetail(val.id)}}>Delete</Button>
                                                     </Row>
                                                 </TableCell>
                                             </TableRow>

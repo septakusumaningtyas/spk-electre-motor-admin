@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Alert,
     UncontrolledAlert,
@@ -17,44 +17,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
-const columns = [
-    { id: 'no', label: 'No', minWidth: 170 },
-    { id: 'nama', label: 'Nama', minWidth: 100 },
-    {
-      id: 'email',
-      label: 'Email',
-      minWidth: 170
-    },
-    {
-      id: 'tanggal',
-      label: 'Tanggal Akses',
-      minWidth: 170,
-    },
-    {
-      id: 'alamat',
-      label: 'Alamat',
-      minWidth: 170,
-    },
-    {
-      id: 'aksi',
-      label: 'Aksi',
-      minWidth: 170,
-    },
-];
-
-function createData(no, nama, email, tanggal, alamat, aksi) {
-    return {no, nama, email, tanggal, alamat, aksi};
-}
-
-const rows = [
-    createData('1', 'Adi', "@gmail.com", "9-10-2020", "Malang", 
-    <Link className="button-link" to="/detail-pengguna"><Button className="btn" color="info">Detail</Button></Link>),
-    createData('2', 'Budi',"@gmail.com" , "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
-    createData('3', 'Chintya', "@gmail.com", "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
-    createData('4', 'Eni', "@gmail.com", "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
-    createData('5', 'Fani', "@gmail.com", "9-10-2020", "Malang", <Button className="btn" color="info">Detail</Button>),
-];
+import Axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -79,6 +42,14 @@ export default function DataPengguna() {
       setPage(0);
     };
 
+    const [penggunaList,setPenggunaList] = useState([]);
+    useEffect(() => {
+        Axios.get('http://localhost:3001/getpengguna')
+            .then((response)=> {
+                setPenggunaList(response.data);
+            });
+    }, []);
+
     return (
         <div>
             <Card>
@@ -92,32 +63,33 @@ export default function DataPengguna() {
                             <TableContainer className={classes.container}>
                                 <Table stickyHeader aria-label="sticky table">
                                 <TableHead>
-                                    <TableRow>
-                                    {columns.map((column) => (
-                                        <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                        >
-                                        {column.label}
-                                        </TableCell>
-                                    ))}
-                                    </TableRow>
+                                    <TableCell style={{minWidth: 50}}>No</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Nama</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Email</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Tanggal Akses</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Alamat</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Aksi</TableCell>
                                 </TableHead>
                                 <TableBody>
-                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                    return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                                            </TableCell>
-                                            );
-                                        })}
-                                        </TableRow>
-                                    );
+                                    {penggunaList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(val=> {
+                                        return (
+                                            <TableRow hover role="checkbox" tabIndex={-1} key={val}>
+                                                <TableCell>{val.id}</TableCell>
+                                                <TableCell>{val.nama_pengguna}</TableCell>
+                                                <TableCell>{val.email_pengguna}</TableCell>
+                                                <TableCell>{val.tgl_akses}</TableCell>
+                                                <TableCell>{val.alamat_pengguna}</TableCell>
+                                                <TableCell>
+                                                    <Row className="mt-3">
+                                                        <Col>
+                                                            <Link className="button-link" to="/detail-pengguna">
+                                                                <Button className="btn" color="info">Detail</Button>
+                                                            </Link>
+                                                        </Col>
+                                                    </Row>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
                                     })}
                                 </TableBody>
                                 </Table>
@@ -125,7 +97,7 @@ export default function DataPengguna() {
                             <TablePagination
                                 rowsPerPageOptions={[10, 25, 100]}
                                 component="div"
-                                count={rows.length}
+                                count={penggunaList.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 onChangePage={handleChangePage}

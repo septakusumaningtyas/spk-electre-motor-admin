@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Alert,
     UncontrolledAlert,
@@ -19,22 +19,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import '../../assets/scss/style.css';
-
-const columns = [
-  { id: 'no', label: 'No', minWidth: 50 },
-  { id: 'nama', label: 'Nama Alternatif', minWidth: 100 },
-];
-
-function createData(no, nama) {
-  return {no, nama};
-}
-
-const rows = [
-  createData('1', 'Honda Vario 125 CC'),
-  createData('2', 'Yamaha Mio M3 125 CC'),
-  createData('3', 'Suzuki Address Playful'),
-  createData('4', 'Vespa S 125 I-GET')
-];
+import Axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -59,56 +44,60 @@ export default function DetailPengguna() {
       setPage(0);
     };
 
+    const [hasilList,setHasilList] = useState([]);
+    useEffect(() => {
+        Axios.get('http://localhost:3001/gethasil')
+            .then((response)=> {
+                setHasilList(response.data);
+            });
+    }, []);
+
     return (
         <div>
             <Card>
                 <CardTitle className="bg-light border-bottom p-3 mb-0">
                     <i className="ti-user mr-2"> </i>
-            Detail Pengguna
+            Data Hasil Perangkingan
             </CardTitle>
                 <CardBody className="">
-                    <div className="mt-3">
-                        <h5>Nama : Adi</h5>
-                        <h5>Email : adi@gmail.com</h5>
-                        <h5>Tanggal Akses : 22-10-2020</h5>
-                        <h5>Alamat : Malang</h5>
-                    </div>
                     <div className="mt-3"><h3>Hasil Perangkingan Rekomendasi Sepeda Motor :</h3></div>
                     <div className="mt-3">
                         <Paper className={classes.root}>
                             <TableContainer className={classes.container}>
                                 <Table stickyHeader aria-label="sticky table">
                                 <TableHead>
-                                    <TableRow>
-                                    {columns.map((column) => (
-                                        <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                        >
-                                        {column.label}
-                                        </TableCell>
-                                    ))}
-                                    </TableRow>
+                                    <TableCell style={{minWidth: 50}}>No</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Nama</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Alternatif 1</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Alternatif 2</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Alternatif 3</TableCell>
+                                    <TableCell style={{minWidth: 50}}>Alternatif 4</TableCell>
                                 </TableHead>
                                 <TableBody>
-                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                    return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                                            </TableCell>
-                                            );
-                                        })}
-                                        </TableRow>
-                                    );
+                                    {hasilList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(val=> {
+                                        return (
+                                            <TableRow hover role="checkbox" tabIndex={-1} key={val}>
+                                                <TableCell>{val.id}</TableCell>
+                                                <TableCell>{val.nama}</TableCell>
+                                                <TableCell>{val.alternatif_1}</TableCell>
+                                                <TableCell>{val.alternatif_2}</TableCell>
+                                                <TableCell>{val.alternatif_3}</TableCell>
+                                                <TableCell>{val.alternatif_4}</TableCell>
+                                            </TableRow>
+                                        );
                                     })}
                                 </TableBody>
                                 </Table>
                             </TableContainer>
+                            <TablePagination
+                                rowsPerPageOptions={[10, 25, 100]}
+                                component="div"
+                                count={hasilList.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onChangePage={handleChangePage}
+                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                            />
                         </Paper>
                         <br/>
                         <Link className="button-link" to="/data-pengguna"><Button className="btn" color="primary">Kembali</Button></Link>
