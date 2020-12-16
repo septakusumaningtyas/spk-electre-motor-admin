@@ -44,29 +44,7 @@ export default function Registration() {
       .then((response) => {
         if(response.data.loggedIn == true)
         {
-          setLoginStatus(response.data.user[0].username);
-        }
-      });
-  }, []);
-
-  const logout = () => {
-    Axios.post("http://localhost:3001/logout", {
-      username: username,
-      password: password,
-    }).then((response) => {
-      if(response.data.message)
-      {
-        setLoginStatus(response.data.message);
-      }
-    });
-  };
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/logout")
-      .then((response) => {
-        if(response.data.loggedIn == false)
-        {
-          setLoginStatus(response.data.user[0].username);
+          setLoginStatus("");
         }
       });
   }, []);

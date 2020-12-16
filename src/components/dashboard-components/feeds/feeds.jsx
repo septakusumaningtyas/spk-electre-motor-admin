@@ -1,17 +1,43 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
     Card,
     CardBody,
     CardTitle,
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
+import Axios from 'axios';
 
-const Feeds = () => {
+export default function Feed() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [logoutStatus, setLogoutStatus] = useState("");
+
+    Axios.defaults.withCredentials = true;
+    const logout = () => {
+        Axios.get("http://localhost:3001/logout", {
+          username: username,
+          password: password,
+        }).then((response) => {
+          if(response.data.message)
+          {
+            setLogoutStatus(response.data.message);
+          }
+        });
+      };
+    
+      useEffect(() => {
+        Axios.get("http://localhost:3001/logout")
+          .then((response) => {
+            if(response.data.loggedIn == false)
+            {
+              setLogoutStatus(response.data.user[0].username);
+            }
+          });
+      }, []);
+
     return (
         <div>
-            <Link to="/registration">
-                <button type="submit" className="btn btn-danger btn-block">Log out</button>
-            </Link>
             <Card>
                 <CardBody>
                     <CardTitle>Contains</CardTitle>
@@ -26,6 +52,13 @@ const Feeds = () => {
                             <li className="feed-item">
                                 <div className="feed-icon bg-danger"><i className="ti-user"></i></div> Jumlah User <span className="ml-auto font-20 text-muted">30</span>
                             </li>
+                            <li className="feed-item">
+                                <div className="feed-icon bg-danger"><i className="ti-user"></i></div> Logout <span className="ml-auto font-20 text-muted">
+                                    <Link to="/registration">
+                                        <button type="submit" className="btn btn-danger btn-block" onClick={{logout}}>Logout</button>
+                                    </Link>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </CardBody>
@@ -33,5 +66,3 @@ const Feeds = () => {
         </div>
     );
 }
-
-export default Feeds;
