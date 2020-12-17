@@ -72,26 +72,26 @@ var ThemeRoutes = [
     path: '/electre-topsis',
     name: 'Electre-Topsis',
     icon: 'ti-pencil-alt',
-    component: Electre
+    component: ProsesElectre
   },
   {
     path: '/topsis',
     name: 'Topsis',
     icon: 'ti-pencil-alt',
-    component: Topsis
+    component: ProsesTopsis
   },
   {
     path: '/detail-pengguna',
     component: DetailPengguna
   },
-  {
-    path: '/proses-electre',
-    component: ProsesElectre
-  },
-  {
-    path: '/proses-topsis',
-    component: ProsesTopsis
-  },
+  // {
+  //   path: '/proses-electre',
+  //   component: ProsesElectre
+  // },
+  // {
+  //   path: '/proses-topsis',
+  //   component: ProsesTopsis
+  // },
   { path: '/', pathTo: '/registration', redirect: true }
 ];
 export default ThemeRoutes;
