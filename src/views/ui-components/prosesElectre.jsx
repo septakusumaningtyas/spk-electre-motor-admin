@@ -81,111 +81,187 @@ const useStyles = makeStyles({
   function createDataRK(no, nama) {
     return { no, nama };
   }
-  
-  const rows = [
-    createData('C1', 2, 0, 0, 0),
-    createData('C2', 0, 3, 0, 0),
-    createData('C3', 0, 0, 3, 0),
-    createData('C4', 0, 0, 0, 3),
-  ];
-
-  const rowsA = [
-    createDataAlternatif('Honda Vario', 2, 3, 3, 3),
-    createDataAlternatif('Yamaha Mio M3', 3, 3, 2, 3),
-    createDataAlternatif('Suzuki Address Playful', 3, 2, 3, 2),
-    createDataAlternatif('Vespa S-125 I-Get', 1, 1, 4, 3),
-  ];
-
-  const rowsR = [
-    createDataTernormalisasi('1', 0.41702882811415, 0.62554324217122, 0.48666426339229, 0.53881590608032),
-    createDataTernormalisasi('2', 0.62554324217122, 0.62554324217122, 0.32444284226153, 0.53881590608032),
-    createDataTernormalisasi('3', 0.62554324217122, 0.41702882811415, 0.48666426339229, 0.35921060405355),
-    createDataTernormalisasi('4', 0.20851441405707, 0.20851441405707, 0.64888568452305, 0.53881590608032),
-  ];
-
-  const rowsV = [
-    createDataV('1', 0.8340576562283, 1.8766297265137, 1.4599927901769, 1.616447718241),
-    createDataV('2', 1.2510864843424, 1.8766297265137, 0.97332852678458, 1.616447718241),
-    createDataV('3', 1.2510864843424, 1.2510864843424, 1.4599927901769, 1.0776318121606),
-    createDataV('4', 0.41702882811415, 0.62554324217122, 1.9466570535692, 1.616447718241),
-  ];
-
-  const rowsCI = [
-    createDataCI('1', '-', '2, 3, 4', '2, 3, 4', '1, 2, 4'),
-    createDataCI('2', '1, 2, 4', '-', '1, 2, 4', '1, 2, 4'),
-    createDataCI('3', '1, 3', '1, 3', '-', '1, 2'),
-    createDataCI('4', '3, 4', '3, 4', '3, 4', '-'),
-  ];
-
-  const rowsDI = [
-    createDataDI('1', '-', '1', '1', '3'),
-    createDataDI('2', '3', '-', '3', '3'),
-    createDataDI('3', '2, 4', '2, 4', '-', '3, 4'),
-    createDataDI('4', '1, 2', '1, 2', '1, 2', '-'),
-  ];
-
-  const rowsConcordance = [
-    createDataConcordance('1', '-', 9, 9, 8),
-    createDataConcordance('2', 8, '-', 8, 8),
-    createDataConcordance('3', 5, 5, '-', 5),
-    createDataConcordance('4', 6, 6, 6, '-'),
-  ];
-
-  const rowsDisordance = [
-    createDataDisordance('1', '-', 0.8569127825562, 0.66666666666667, 0.38899330260775),
-    createDataDisordance('2', 1, '-', 0.7779866052155, 0.7779866052155),
-    createDataDisordance('3', 1, 1, '-', 0.64601757691058),
-    createDataDisordance('4', 1, 1, 1, '-'),
-  ];
-
-  const rowsF = [
-    createDataF('1', 0, 1, 1, 1),
-    createDataF('2', 1, 0, 1, 1),
-    createDataF('3', 0, 0, 0, 0),
-    createDataF('4', 0, 0, 0, 0),
-  ];
-
-  const rowsG = [
-    createDataG('1', 0, 1, 0, 0),
-    createDataG('2', 1, 0, 0, 0),
-    createDataG('3', 1, 1, 0, 0),
-    createDataG('4', 1, 1, 1, 0),
-  ];
-
-  const rowsCD = [
-    createDataCD('1', 0, 8, 8, 7),
-    createDataCD('2', 7, 0, 7, 7),
-    createDataCD('3', 5, 5, 0, 5),
-    createDataCD('4', 6, 6, 6, 0),
-  ];
-
-  const rowsDD = [
-    createDataDD('1', 0, -0.143087217, 0.666666667, 0.388993303),
-    createDataDD('2', 0, 0, 0.777986605, 0.777986605),
-    createDataDD('3', 0, 0, 0, 0.646017577),
-    createDataDD('4', 0, 0, 0, 0),
-  ];
-
-  const rowsP = [
-    createDataP('1', 0, -0.017571618, 0.090909091, 0.058840252),
-    createDataP('2', 0, 0, 0.125037758, 0.125037758),
-    createDataP('3', 0, 0, 0, 0.148373952),
-    createDataP('4', 0, 0, 0, 0),
-  ];
-
-  const rowsPK = [
-    createDataPK('Pk', 0.044059242, 0.083358505, 0.049457984, 0),
-  ];
-
-  const rowsRanking = [
-    createDataRK(1 , 'Yamaha Mio M3 125 CC'),
-    createDataRK(2 , 'Suzuki Address Playful'),
-    createDataRK(3 , 'Honda Vario 125 CC'),
-    createDataRK(4 , 'Vespa S 125 I-GET'),
-  ];
 
 export default function ProsesElectre() {
     const classes = useStyles();
+
+    const bobot1 = 2, bobot2 = 3, bobot3 = 3, bobot4 = 3;
+    const a1 = 'Honda Vario', a2 = 'Yamaha Mio M3', a3 = 'Suzuki Address Playful', a4 = 'Vespa S-125 I-Get';
+    const a1k1 = 2, a1k2 = 3, a1k3 = 3, a1k4 = 3;
+    const a2k1 = 3, a2k2 = 3, a2k3 = 2, a2k4 = 3;
+    const a3k1 = 3, a3k2 = 2, a3k3 = 3, a3k4 = 2;
+    const a4k1 = 1, a4k2 = 1, a4k3 = 4, a4k4 = 3;
+    const r1k1 = a1k1/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2))), 
+          r1k2 = a1k2/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2))), 
+          r1k3 = a1k3/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2))), 
+          r1k4 = a1k4/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2)));
+    const r2k1 = a2k1/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2))), 
+          r2k2 = a2k2/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2))), 
+          r2k3 = a2k3/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2))), 
+          r2k4 = a2k4/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2)));
+    const r3k1 = a3k1/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2))), 
+          r3k2 = a3k2/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2))), 
+          r3k3 = a3k3/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2))), 
+          r3k4 = a3k4/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2)));
+    const r4k1 = a4k1/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2))), 
+          r4k2 = a4k2/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2))), 
+          r4k3 = a4k3/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2))), 
+          r4k4 = a4k4/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2)));
+    const v1k1 = r1k1*bobot1, v1k2 = r1k2*bobot2, v1k3 = r1k3*bobot3, v1k4 = r1k4*bobot4;
+    const v2k1 = r2k1*bobot1, v2k2 = r2k2*bobot2, v2k3 = r2k3*bobot3, v2k4 = r2k4*bobot4;
+    const v3k1 = r3k1*bobot1, v3k2 = r3k2*bobot2, v3k3 = r3k3*bobot3, v3k4 = r3k4*bobot4;
+    const v4k1 = r4k1*bobot1, v4k2 = r4k2*bobot2, v4k3 = r4k3*bobot3, v4k4 = r4k4*bobot4;
+    const ci1a1 = '-', ci1a2 = '2, 3, 4', ci1a3 = '2, 3, 4', ci1a4 = '1, 2, 4';
+    const ci2a1 = '1, 2, 4', ci2a2 = '-', ci2a3 = '1, 2, 4', ci2a4 = '1, 2, 4';
+    const ci3a1 = '1, 3', ci3a2 = '1, 3', ci3a3 = '-', ci3a4 = '1, 2';
+    const ci4a1 = '3, 4', ci4a2 = '3, 4', ci4a3 = '3, 4', ci4a4 = '-';
+    const di1a1 = '-', di1a2 = '1', di1a3 = '1', di1a4 = '3';
+    const di2a1 = '3', di2a2 = '-', di2a3 = '3', di2a4 = '3';
+    const di3a1 = '2, 4', di3a2 = '2, 4', di3a3 = '-', di3a4 = '3, 4';
+    const di4a1 = '1, 2', di4a2 = '1, 2', di4a3 = '1, 2', di4a4 = '-';
+    const c1a1 = 0, c1a2 = bobot2+bobot3+bobot4, c1a3 = bobot2+bobot3+bobot4, c1a4 = bobot1+bobot2+bobot4;
+    const c2a1 = bobot1+bobot2+bobot4, c2a2 = 0, c2a3 = bobot1+bobot2+bobot4, c2a4 = bobot1+bobot2+bobot4;
+    const c3a1 = bobot1+bobot3, c3a2 = bobot1+bobot3, c3a3 = 0, c3a4 = bobot1+bobot2;
+    const c4a1 = bobot3+bobot4, c4a2 = bobot3+bobot4, c4a3 = bobot3+bobot4, c4a4 = 0;
+    const d1a1 = 0, 
+          d1a2 = Math.max(Math.abs(v1k1-v2k1))/Math.max(Math.abs(v1k1-v2k1),Math.abs(v1k2-v2k2),Math.abs(v1k3-v2k3),Math.abs(v1k4-v2k4)), 
+          d1a3 = Math.max(Math.abs(v1k1-v3k1))/Math.max(Math.abs(v1k1-v3k1),Math.abs(v1k2-v3k2),Math.abs(v1k3-v3k3),Math.abs(v1k4-v3k4)), 
+          d1a4 = Math.max(Math.abs(v1k3-v4k3))/Math.max(Math.abs(v1k1-v4k1),Math.abs(v1k2-v4k2),Math.abs(v1k3-v4k3),Math.abs(v1k4-v4k4));
+    const d2a1 = Math.max(Math.abs(v2k3-v1k3))/Math.max(Math.abs(v2k1-v1k1),Math.abs(v2k2-v1k2),Math.abs(v2k3-v1k3),Math.abs(v2k4-v1k4)), 
+          d2a2 = 0, 
+          d2a3 = Math.max(Math.abs(v2k3-v3k3))/Math.max(Math.abs(v2k1-v3k1),Math.abs(v2k2-v3k2),Math.abs(v2k3-v3k3),Math.abs(v2k4-v3k4)), 
+          d2a4 = Math.max(Math.abs(v2k3-v4k3))/Math.max(Math.abs(v2k1-v4k1),Math.abs(v2k2-v4k2),Math.abs(v2k3-v4k3),Math.abs(v2k4-v4k4));
+    const d3a1 = Math.max(Math.abs(v3k2-v1k2),Math.abs(v3k4-v1k4))/Math.max(Math.abs(v3k1-v1k1),Math.abs(v3k2-v1k2),Math.abs(v3k3-v1k3),Math.abs(v3k4-v1k4)), 
+          d3a2 = Math.max(Math.abs(v3k2-v2k2),Math.abs(v3k4-v2k4))/Math.max(Math.abs(v3k1-v2k1),Math.abs(v3k2-v2k2),Math.abs(v3k3-v2k3),Math.abs(v3k4-v2k4)), 
+          d3a3 = 0, 
+          d3a4 = Math.max(Math.abs(v3k3-v4k3),Math.abs(v3k4-v4k4))/Math.max(Math.abs(v3k4-v4k4),Math.abs(v3k2-v4k2),Math.abs(v3k3-v4k3),Math.abs(v3k4-v4k4));
+    const d4a1 = Math.max(Math.abs(v4k1-v1k1),Math.abs(v4k2-v1k2))/Math.max(Math.abs(v4k1-v1k1),Math.abs(v4k2-v1k2),Math.abs(v4k3-v1k3),Math.abs(v4k4-v1k4)), 
+          d4a2 = Math.max(Math.abs(v4k1-v2k1),Math.abs(v4k2-v2k2))/Math.max(Math.abs(v4k1-v2k1),Math.abs(v4k2-v2k2),Math.abs(v4k3-v2k3),Math.abs(v4k4-v2k4)), 
+          d4a3 = Math.max(Math.abs(v4k1-v3k1),Math.abs(v4k2-v3k2))/Math.max(Math.abs(v4k1-v3k1),Math.abs(v4k2-v3k2),Math.abs(v4k3-v3k3),Math.abs(v4k4-v3k4)), 
+          d4a4 = 0;
+    const c = (c1a2+c1a3+c1a4+c2a1+c2a3+c2a4+c3a1+c3a2+c3a4+c4a1+c4a2+c4a3)/(4*(4-1));
+    const d = (d1a2+d1a3+d1a4+d2a1+d2a3+d2a4+d3a1+d3a2+d3a4+d4a1+d4a2+d4a3)/(4*(4-1));
+    const f1a1=0,f1a2=1,f1a3=1,f1a4=1; const f2a1=1,f2a2=0,f2a3=1,f2a4=1; const f3a1=0,f3a2=0,f3a3=0,f3a4=0; const f4a1=0,f4a2=0,f4a3=0,f4a4=0;
+    const g1a1=0,g1a2=1,g1a3=0,g1a4=0; const g2a1=1,g2a2=0,g2a3=0,g2a4=0; const g3a1=1,g3a2=1,g3a3=0,g3a4=0; const g4a1=1,g4a2=1,g4a3=1,g4a4=0;
+    const cd1a1 = c1a1-f1a1, cd1a2 = c1a2-f1a2, cd1a3 = c1a3-f1a3, cd1a4 = c1a4-f1a4;
+    const cd2a1 = c2a1-f2a1, cd2a2 = c2a2-f2a2, cd2a3 = c2a3-f2a3, cd2a4 = c2a4-f2a4;
+    const cd3a1 = c3a1-f3a1, cd3a2 = c3a2-f3a2, cd3a3 = c3a3-f3a3, cd3a4 = c3a4-f3a4;
+    const cd4a1 = c4a1-f4a1, cd4a2 = c4a2-f4a2, cd4a3 = c4a3-f4a3, cd4a4 = c4a4-f4a4;
+    const dd1a1 = d1a1-g1a1, dd1a2 = d1a2-g1a2, dd1a3 = d1a3-g1a3, dd1a4 = d1a4-g1a4;
+    const dd2a1 = d2a1-g2a1, dd2a2 = d2a2-g2a2, dd2a3 = d2a3-g2a3, dd2a4 = d2a4-g2a4;
+    const dd3a1 = d3a1-g3a1, dd3a2 = d3a2-g3a2, dd3a3 = d3a3-g3a3, dd3a4 = d3a4-g3a4;
+    const dd4a1 = d4a1-g4a1, dd4a2 = d4a2-g4a2, dd4a3 = d4a3-g4a3, dd4a4 = d4a4-g4a4;
+    const p1a1 = 0, p1a2 = dd1a2/(cd1a2-dd1a2), p1a3 = dd1a3/(cd1a3-dd1a3), p1a4 = dd1a4/(cd1a4-dd1a4);
+    const p2a1 = dd2a1/(cd2a1-dd2a1), p2a2=0, p2a3 = dd2a3/(cd2a3-dd2a3), p2a4 = dd2a4/(cd2a4-dd2a4);
+    const p3a1 = dd3a1/(cd3a1-dd3a1), p3a2 = dd3a2/(cd3a2-dd3a2), p3a3=0, p3a4 = dd3a4/(cd3a4-dd3a4);
+    const p4a1 = dd4a1/(cd4a1-dd4a1), p4a2 = dd4a2/(cd4a2-dd4a2), p4a3 = dd4a3/(cd4a3-dd4a3), p4a4 = 0;
+    const pk1 = (p1a1+p1a2+p1a3+p1a4)/(4-1),  
+          pk2 = (p2a1+p2a2+p2a3+p2a4)/(4-1), 
+          pk3 = (p3a1+p3a2+p3a3+p3a4)/(4-1), 
+          pk4 = (p4a1+p4a2+p4a3+p4a4)/(4-1);
+    const rank1 = a2, rank2 = a3, rank3 = a1, rank4 = a4;
+
+    const rows = [
+        createData('C1', bobot1, 0, 0, 0),
+        createData('C2', 0, bobot2, 0, 0),
+        createData('C3', 0, 0, bobot3, 0),
+        createData('C4', 0, 0, 0, bobot4),
+      ];
+    
+      const rowsA = [
+        createDataAlternatif(a1, a1k1, a1k2, a1k3, a1k4),
+        createDataAlternatif(a2, a2k1, a2k2, a2k3, a2k4),
+        createDataAlternatif(a3, a3k1, a3k2, a3k3, a3k4),
+        createDataAlternatif(a4, a4k1, a4k2, a4k3, a4k4),
+      ];
+    
+      const rowsR = [
+        createDataTernormalisasi('1', r1k1, r1k2, r1k3, r1k4),
+        createDataTernormalisasi('2', r2k1, r2k2, r2k3, r2k4),
+        createDataTernormalisasi('3', r3k1, r3k2, r3k3, r3k4),
+        createDataTernormalisasi('4', r4k1, r4k2, r4k3, r4k4),
+      ];
+    
+      const rowsV = [
+        createDataV('1', v1k1, v1k2, v1k3, v1k4),
+        createDataV('2', v2k1, v2k2, v2k3, v2k4),
+        createDataV('3', v3k1, v3k2, v3k3, v3k4),
+        createDataV('4', v4k1, v4k2, v4k3, v4k4),
+      ];
+    
+      const rowsCI = [
+        createDataCI('1', ci1a1, ci1a2, ci1a3, ci1a4),
+        createDataCI('2', ci2a1, ci2a2, ci2a3, ci2a4),
+        createDataCI('3', ci3a1, ci3a2, ci3a3, ci3a4),
+        createDataCI('4', ci4a1, ci4a2, ci4a3, ci4a4),
+      ];
+    
+      const rowsDI = [
+        createDataDI('1', di1a1, di1a2, di1a3, di1a4),
+        createDataDI('2', di2a1, di2a2, di2a3, di2a4),
+        createDataDI('3', di3a1, di3a2, di3a3, di3a4),
+        createDataDI('4', di4a1, di4a2, di4a3, di4a4),
+      ];
+    
+      const rowsConcordance = [
+        createDataConcordance('1', c1a1, c1a2, c1a3, c1a4),
+        createDataConcordance('2', c2a1, c2a2, c2a3, c2a4),
+        createDataConcordance('3', c3a1, c3a2, c3a3, c3a4),
+        createDataConcordance('4', c4a1, c4a2, c4a3, c4a4),
+      ];
+    
+      const rowsDisordance = [
+        createDataDisordance('1', d1a1, d1a2, d1a3, d1a4),
+        createDataDisordance('2', d2a1, d2a2, d2a3, d2a4),
+        createDataDisordance('3', d3a1, d3a2, d3a3, d3a4),
+        createDataDisordance('4', d4a1, d4a2, d4a3, d4a4),
+      ];
+    
+      const rowsF = [
+        createDataF('1', f1a1, f1a2, f1a3, f1a4),
+        createDataF('2', f2a1, f2a2, f2a3, f2a4),
+        createDataF('3', f3a1, f3a2, f3a3, f3a4),
+        createDataF('4', f4a1, f4a2, f4a3, f4a4),
+      ];
+    
+      const rowsG = [
+        createDataG('1', g1a1, g1a2, g1a3, g1a4),
+        createDataG('2', g2a1, g2a2, g2a3, g2a4),
+        createDataG('3', g3a1, g3a2, g3a3, g3a4),
+        createDataG('4', g4a1, g4a2, g4a3, g4a4),
+      ];
+    
+      const rowsCD = [
+        createDataCD('1', cd1a1, cd1a2, cd1a3, cd1a4),
+        createDataCD('2', cd2a1, cd2a2, cd2a3, cd2a4),
+        createDataCD('3', cd3a1, cd3a2, cd3a3, cd3a4),
+        createDataCD('4', cd4a1, cd4a2, cd4a3, cd4a4),
+      ];
+    
+      const rowsDD = [
+        createDataDD('1', dd1a1, dd1a2, dd1a3, dd1a4),
+        createDataDD('2', dd2a1, dd2a2, dd2a3, dd2a4),
+        createDataDD('3', dd3a1, dd3a2, dd3a3, dd3a4),
+        createDataDD('4', dd4a1, dd4a2, dd4a3, dd4a4),
+      ];
+    
+      const rowsP = [
+        createDataP('1', p1a1, p1a2, p1a3, p1a4),
+        createDataP('2', p2a1, p2a2, p2a3, p2a4),
+        createDataP('3', p3a1, p3a2, p3a3, p3a4),
+        createDataP('4', p4a1, p4a2, p4a3, p4a4),
+      ];
+    
+      const rowsPK = [
+        createDataPK('Pk', pk1, pk2, pk3, pk4),
+      ];
+    
+      const rowsRanking = [
+        createDataRK(1 , rank1),
+        createDataRK(2 , rank2),
+        createDataRK(3 , rank3),
+        createDataRK(4 , rank4),
+      ];
 
     return (
         <div>
@@ -376,7 +452,7 @@ export default function ProsesElectre() {
                         <br/>
                     </div>
                     <h4>Membentuk Matriks Concordance (C)</h4>
-                    <h6>Threshold c: 6.9166666666667</h6>
+                    <h6>Threshold c: {c}</h6>
                     <div className="mt-3">
                         <TableContainer component={Paper}>
                             <Table className={classes.table} size="small" aria-label="a dense table">
@@ -407,7 +483,7 @@ export default function ProsesElectre() {
                         <br/>
                     </div>
                     <h4>Membentuk Matriks Discordance (D)</h4>
-                    <h6>Threshold d: 0.84288029493102</h6>
+                    <h6>Threshold d: {d}</h6>
                     <div className="mt-3">
                         <TableContainer component={Paper}>
                             <Table className={classes.table} size="small" aria-label="a dense table">
@@ -624,7 +700,7 @@ export default function ProsesElectre() {
                                 <TableHead>
                                 <TableRow>
                                     <TableCell>Rangking No</TableCell>
-                                    <TableCell align="right">Nama Alternatif</TableCell>
+                                    <TableCell align="left">Nama Alternatif</TableCell>
                                 </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -633,7 +709,7 @@ export default function ProsesElectre() {
                                     <TableCell component="th" scope="row">
                                         {row.no}
                                     </TableCell>
-                                    <TableCell align="right">{row.nama}</TableCell>
+                                    <TableCell align="left">{row.nama}</TableCell>
                                     </TableRow>
                                 ))}
                                 </TableBody>
