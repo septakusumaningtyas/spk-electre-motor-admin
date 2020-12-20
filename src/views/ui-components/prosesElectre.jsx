@@ -86,27 +86,31 @@ export default function ProsesElectre() {
     const classes = useStyles();
 
     const bobot1 = 2, bobot2 = 3, bobot3 = 3, bobot4 = 3;
-    const a1 = 'Honda Vario', a2 = 'Yamaha Mio M3', a3 = 'Suzuki Address Playful', a4 = 'Vespa S-125 I-Get';
+    const a1 = 'Honda Vario 125 CC', a2 = 'Yamaha Mio M3 125 CC', a3 = 'Suzuki Address Playful', a4 = 'Vespa S-125 I-Get';
     const a1k1 = 2, a1k2 = 3, a1k3 = 3, a1k4 = 3;
     const a2k1 = 3, a2k2 = 3, a2k3 = 2, a2k4 = 3;
     const a3k1 = 3, a3k2 = 2, a3k3 = 3, a3k4 = 2;
     const a4k1 = 1, a4k2 = 1, a4k3 = 4, a4k4 = 3;
-    const r1k1 = a1k1/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2))), 
-          r1k2 = a1k2/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2))), 
-          r1k3 = a1k3/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2))), 
-          r1k4 = a1k4/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a1k2,2))+(Math.pow(a1k3,2))+(Math.pow(a1k4,2)));
-    const r2k1 = a2k1/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2))), 
-          r2k2 = a2k2/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2))), 
-          r2k3 = a2k3/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2))), 
-          r2k4 = a2k4/Math.sqrt((Math.pow(a2k1,2))+(Math.pow(a2k2,2))+(Math.pow(a2k3,2))+(Math.pow(a2k4,2)));
-    const r3k1 = a3k1/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2))), 
-          r3k2 = a3k2/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2))), 
-          r3k3 = a3k3/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2))), 
-          r3k4 = a3k4/Math.sqrt((Math.pow(a3k1,2))+(Math.pow(a3k2,2))+(Math.pow(a3k3,2))+(Math.pow(a3k4,2)));
-    const r4k1 = a4k1/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2))), 
-          r4k2 = a4k2/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2))), 
-          r4k3 = a4k3/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2))), 
-          r4k4 = a4k4/Math.sqrt((Math.pow(a4k1,2))+(Math.pow(a4k2,2))+(Math.pow(a4k3,2))+(Math.pow(a4k4,2)));
+    const r1k1 = a1k1/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a2k1,2))+(Math.pow(a3k1,2))+(Math.pow(a4k1,2))), 
+          r1k2 = a1k2/Math.sqrt((Math.pow(a1k2,2))+(Math.pow(a2k2,2))+(Math.pow(a3k2,2))+(Math.pow(a4k2,2))), 
+          r1k3 = a1k3/Math.sqrt((Math.pow(a1k3,2))+(Math.pow(a2k3,2))+(Math.pow(a3k3,2))+(Math.pow(a4k3,2))), 
+          r1k4 = a1k4/Math.sqrt((Math.pow(a1k4,2))+(Math.pow(a2k4,2))+(Math.pow(a3k4,2))+(Math.pow(a4k4,2)));
+
+    const r2k1 = a2k1/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a2k1,2))+(Math.pow(a3k1,2))+(Math.pow(a4k1,2))), 
+          r2k2 = a2k2/Math.sqrt((Math.pow(a1k2,2))+(Math.pow(a2k2,2))+(Math.pow(a3k2,2))+(Math.pow(a4k2,2))), 
+          r2k3 = a2k3/Math.sqrt((Math.pow(a1k3,2))+(Math.pow(a2k3,2))+(Math.pow(a3k3,2))+(Math.pow(a4k3,2))), 
+          r2k4 = a2k4/Math.sqrt((Math.pow(a1k4,2))+(Math.pow(a2k4,2))+(Math.pow(a3k4,2))+(Math.pow(a4k4,2)));
+
+    const r3k1 = a3k1/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a2k1,2))+(Math.pow(a3k1,2))+(Math.pow(a4k1,2))), 
+          r3k2 = a3k2/Math.sqrt((Math.pow(a1k2,2))+(Math.pow(a2k2,2))+(Math.pow(a3k2,2))+(Math.pow(a4k2,2))), 
+          r3k3 = a3k3/Math.sqrt((Math.pow(a1k3,2))+(Math.pow(a2k3,2))+(Math.pow(a3k3,2))+(Math.pow(a4k3,2))), 
+          r3k4 = a3k4/Math.sqrt((Math.pow(a1k4,2))+(Math.pow(a2k4,2))+(Math.pow(a3k4,2))+(Math.pow(a4k4,2)));
+
+    const r4k1 = a4k1/Math.sqrt((Math.pow(a1k1,2))+(Math.pow(a2k1,2))+(Math.pow(a3k1,2))+(Math.pow(a4k1,2))), 
+          r4k2 = a4k2/Math.sqrt((Math.pow(a1k2,2))+(Math.pow(a2k2,2))+(Math.pow(a3k2,2))+(Math.pow(a4k2,2))), 
+          r4k3 = a4k3/Math.sqrt((Math.pow(a1k3,2))+(Math.pow(a2k3,2))+(Math.pow(a3k3,2))+(Math.pow(a4k3,2))), 
+          r4k4 = a4k4/Math.sqrt((Math.pow(a1k4,2))+(Math.pow(a2k4,2))+(Math.pow(a3k4,2))+(Math.pow(a4k4,2)));
+
     const v1k1 = r1k1*bobot1, v1k2 = r1k2*bobot2, v1k3 = r1k3*bobot3, v1k4 = r1k4*bobot4;
     const v2k1 = r2k1*bobot1, v2k2 = r2k2*bobot2, v2k3 = r2k3*bobot3, v2k4 = r2k4*bobot4;
     const v3k1 = r3k1*bobot1, v3k2 = r3k2*bobot2, v3k3 = r3k3*bobot3, v3k4 = r3k4*bobot4;
@@ -123,18 +127,22 @@ export default function ProsesElectre() {
     const c2a1 = bobot1+bobot2+bobot4, c2a2 = 0, c2a3 = bobot1+bobot2+bobot4, c2a4 = bobot1+bobot2+bobot4;
     const c3a1 = bobot1+bobot3, c3a2 = bobot1+bobot3, c3a3 = 0, c3a4 = bobot1+bobot2;
     const c4a1 = bobot3+bobot4, c4a2 = bobot3+bobot4, c4a3 = bobot3+bobot4, c4a4 = 0;
+    
     const d1a1 = 0, 
           d1a2 = Math.max(Math.abs(v1k1-v2k1))/Math.max(Math.abs(v1k1-v2k1),Math.abs(v1k2-v2k2),Math.abs(v1k3-v2k3),Math.abs(v1k4-v2k4)), 
           d1a3 = Math.max(Math.abs(v1k1-v3k1))/Math.max(Math.abs(v1k1-v3k1),Math.abs(v1k2-v3k2),Math.abs(v1k3-v3k3),Math.abs(v1k4-v3k4)), 
           d1a4 = Math.max(Math.abs(v1k3-v4k3))/Math.max(Math.abs(v1k1-v4k1),Math.abs(v1k2-v4k2),Math.abs(v1k3-v4k3),Math.abs(v1k4-v4k4));
+
     const d2a1 = Math.max(Math.abs(v2k3-v1k3))/Math.max(Math.abs(v2k1-v1k1),Math.abs(v2k2-v1k2),Math.abs(v2k3-v1k3),Math.abs(v2k4-v1k4)), 
           d2a2 = 0, 
           d2a3 = Math.max(Math.abs(v2k3-v3k3))/Math.max(Math.abs(v2k1-v3k1),Math.abs(v2k2-v3k2),Math.abs(v2k3-v3k3),Math.abs(v2k4-v3k4)), 
           d2a4 = Math.max(Math.abs(v2k3-v4k3))/Math.max(Math.abs(v2k1-v4k1),Math.abs(v2k2-v4k2),Math.abs(v2k3-v4k3),Math.abs(v2k4-v4k4));
+
     const d3a1 = Math.max(Math.abs(v3k2-v1k2),Math.abs(v3k4-v1k4))/Math.max(Math.abs(v3k1-v1k1),Math.abs(v3k2-v1k2),Math.abs(v3k3-v1k3),Math.abs(v3k4-v1k4)), 
           d3a2 = Math.max(Math.abs(v3k2-v2k2),Math.abs(v3k4-v2k4))/Math.max(Math.abs(v3k1-v2k1),Math.abs(v3k2-v2k2),Math.abs(v3k3-v2k3),Math.abs(v3k4-v2k4)), 
           d3a3 = 0, 
-          d3a4 = Math.max(Math.abs(v3k3-v4k3),Math.abs(v3k4-v4k4))/Math.max(Math.abs(v3k4-v4k4),Math.abs(v3k2-v4k2),Math.abs(v3k3-v4k3),Math.abs(v3k4-v4k4));
+          d3a4 = Math.max(Math.abs(v3k3-v4k3),Math.abs(v3k4-v4k4))/Math.max(Math.abs(v3k1-v4k1),Math.abs(v3k2-v4k2),Math.abs(v3k3-v4k3),Math.abs(v3k4-v4k4));
+
     const d4a1 = Math.max(Math.abs(v4k1-v1k1),Math.abs(v4k2-v1k2))/Math.max(Math.abs(v4k1-v1k1),Math.abs(v4k2-v1k2),Math.abs(v4k3-v1k3),Math.abs(v4k4-v1k4)), 
           d4a2 = Math.max(Math.abs(v4k1-v2k1),Math.abs(v4k2-v2k2))/Math.max(Math.abs(v4k1-v2k1),Math.abs(v4k2-v2k2),Math.abs(v4k3-v2k3),Math.abs(v4k4-v2k4)), 
           d4a3 = Math.max(Math.abs(v4k1-v3k1),Math.abs(v4k2-v3k2))/Math.max(Math.abs(v4k1-v3k1),Math.abs(v4k2-v3k2),Math.abs(v4k3-v3k3),Math.abs(v4k4-v3k4)), 
